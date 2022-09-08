@@ -268,7 +268,7 @@ if len(additional_expression)==0:
     additional_expression=None
 
 if file_received is not None:
-    if package!=[]
+    if package!=[]:
         anonymize_now=st.button("Run")
         if anonymize_now:
             st.write(anonymized_text(manual_input,package,union_intersection,additional_details,additional_expression))
