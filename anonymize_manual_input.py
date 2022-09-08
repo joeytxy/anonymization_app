@@ -259,10 +259,6 @@ additional_expression=[]
 for i in range(0,int(num)):
     regular_expression=other_expression.text_input("What is the regular expression?",key=str(i)+"_reg")
     replacement=other_expression.text_input("What would you like to replace it with?",key=str(i)+"_rep")
-    if regular_expression=="": 
-        raise Exception("Please fill in a regular expression")
-    if replacement=="":
-        raise Exception("Please fill in a replacement string")
     additional_expression.append([regular_expression,replacement])
 if len(additional_expression)==0:
     additional_expression=None
