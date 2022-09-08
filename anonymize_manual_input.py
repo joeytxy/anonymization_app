@@ -211,6 +211,7 @@ def anonymized_text(user_input,package=['stanza'],union_intersection=None,additi
         for i in additional_expression:
             final_return = re.sub(i[0],i[1],final_return, flags=re.IGNORECASE)
     return final_return
+st.caption("A run button will appear at the end of the page when all required details are given")
 st.title("Anonymize Manual Input")
 manual_input=st.text_area("What would you like to anonymize?")
 package_choice,other_detail,other_expression=st.columns(3)
