@@ -321,11 +321,6 @@ if input1 is not None:
     if package!=[]:
         anonymize_now=st.button("Run")
         if anonymize_now:
-            for i in additional_expression:
-                if i[0]=="":
-                    raise Exception("Please fill in a regular expression for all pairs")   
-                elif i[1]=="":
-                    raise Exception("Please fill in a replacement string for all pairs")
             results=anonymized_text_color(input1,package,union_intersection,additional_details,additional_expression)
             original,anonymized=st.columns(2)
             original.subheader("Original Text")
