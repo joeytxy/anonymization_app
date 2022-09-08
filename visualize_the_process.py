@@ -257,6 +257,7 @@ def anonymized_text_color(user_input,package=['stanza'],union_intersection=None,
 
 st.title("Lets Visualize!")
 option=st.radio("Would you like to see a color-coded output for a single manual input or a txt file?",("Single Manual Input","txt file"))
+input1=None
 if option=="Single Manual Input":
     input1=st.text_area("Write something to run")
 else:
@@ -320,7 +321,7 @@ for i in range(0,int(num)):
 if len(additional_expression)==0:
     additional_expression=None
 
-if input1 not None:
+if input1 is not None:
     anonymize_now=st.button("Run")
     if anonymize_now:
         results=anonymized_text_color(input1,package,union_intersection,additional_details,additional_expression)
