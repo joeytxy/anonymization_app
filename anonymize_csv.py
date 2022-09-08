@@ -230,13 +230,17 @@ def anonymized_csv_file(user_input,package=['stanza'],union_intersection=None,ad
     return output    
 st.title("Anonymize CSV File")
 file_received = st.file_uploader("", type=['CSV'])
+count=0
 if file_received is not None:
+    count+=1
     original_file_name=file_received.name
     final_file_name=original_file_name.replace(".csv", "_anonymized_") + ".csv"
     input1 = pd.read_csv(file_received)
 package_choice,other_detail,other_expression=st.columns(3)
 package_choice.subheader("Step 1")
 package=package_choice.multiselect("Select the package(s) you would like to use. You may also select more than one package",['nltk','spacy','flair','stanza'])
+if package!=[]:
+    count+=1
 union_intersection=None
 if len(package)>1:
     union_intersection=package_choice.radio("Would you like to take an union or an intersection?",('union','intersection'))
@@ -288,17 +292,16 @@ for i in range(0,int(num)):
 if len(additional_expression)==0:
     additional_expression=None
 
-if file_received is not None:
-    if package!=[]:
-        anonymize_now=st.button("Run")
-        if anonymize_now:
-            st.download_button(
-            label="Download anonymized file",
-            data=anonymized_csv_file(input1,package,union_intersection,additional_details,additional_expression),
-            file_name=final_file_name,
-            mime="text/csv"
-            )
-            st.snow()
+if count==2:
+    anonymize_now=st.button("Run")
+    if anonymize_now:
+        st.download_button(
+        label="Download anonymized file",
+        data=anonymized_csv_file(input1,package,union_intersection,additional_details,additional_expression),
+        file_name=final_file_name,
+        mime="text/csv"
+        )
+        st.snow()
 
 
 
