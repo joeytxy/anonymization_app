@@ -320,8 +320,7 @@ for i in range(0,int(num)):
 if len(additional_expression)==0:
     additional_expression=None
 
-if file_received is not None:
-    if package!=[]:
+if count==2:
         anonymize_now=st.button("Run")
         if anonymize_now:
             results=anonymized_text_color(input1,package,union_intersection,additional_details,additional_expression)
