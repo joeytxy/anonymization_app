@@ -228,6 +228,7 @@ def anonymized_csv_file(user_input,package=['stanza'],union_intersection=None,ad
         df_anonymized[columns[i]] = text
     output=convert_df(df_anonymized)
     return output    
+st.caption("A run button will appear at the end of the page when all required details are given")
 st.title("Anonymize CSV File")
 file_received = st.file_uploader("", type=['CSV'])
 count=0
