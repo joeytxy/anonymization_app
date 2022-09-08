@@ -260,11 +260,18 @@ for i in range(0,int(num)):
     regular_expression=other_expression.text_input("What is the regular expression?",key=str(i)+"_reg")
     replacement=other_expression.text_input("What would you like to replace it with?",key=str(i)+"_rep")
     additional_expression.append([regular_expression,replacement])
+empty=0
+if len(additional_expression)!=0:
+    for i in additional_expression:
+        if i[0]=="":
+            empty+=1
+        if i[1]=="":
+            empty+=1
 if len(additional_expression)==0:
     additional_expression=None
-
 if package!=[]:
-    anonymize_now=st.button("Run")
-    if anonymize_now:
-        st.write(anonymized_text(manual_input,package,union_intersection,additional_details,additional_expression))
-        st.snow()
+    if empty==0:
+        anonymize_now=st.button("Run")
+        if anonymize_now:
+            st.write(anonymized_text(manual_input,package,union_intersection,additional_details,additional_expression))
+            st.snow()
