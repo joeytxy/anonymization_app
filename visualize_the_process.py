@@ -313,17 +313,21 @@ additional_expression=[]
 for i in range(0,int(num)):
     regular_expression=other_expression.text_input("What is the regular expression?",key=str(i)+"_reg")
     replacement=other_expression.text_input("What would you like to replace it with?",key=str(i)+"_rep")
+    if regular_expression=="": 
+        raise Exception("Please fill in a regular expression")
+    if replacement=="":
+        raise Exception("Please fill in a replacement string")
     additional_expression.append([regular_expression,replacement])
-for i in additional_expression:
-        if i[0]=="":
-             raise Exception("Please fill in a regular expression for all pairs")   
-        elif i[1]=="":
-                raise Exception("Please fill in a replacement string for all pairs")
 if len(additional_expression)==0:
     additional_expression=None
+
 if input1 is not None:
     anonymize_now=st.button("Run")
     if anonymize_now:
+        if i[0]=="":
+            raise Exception("Please fill in a regular expression for all pairs")   
+        elif i[1]=="":
+            raise Exception("Please fill in a replacement string for all pairs")
         results=anonymized_text_color(input1,package,union_intersection,additional_details,additional_expression)
         original,anonymized=st.columns(2)
         original.subheader("Original Text")
@@ -331,3 +335,4 @@ if input1 is not None:
         anonymized.subheader("Anonymized Text")
         anonymized.markdown(results[1],unsafe_allow_html=True)
         st.snow()
+        
