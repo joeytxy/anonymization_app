@@ -314,17 +314,24 @@ for i in range(0,int(num)):
     regular_expression=other_expression.text_input("What is the regular expression?",key=str(i)+"_reg")
     replacement=other_expression.text_input("What would you like to replace it with?",key=str(i)+"_rep")
     additional_expression.append([regular_expression,replacement])
+empty=0
+if len(additional_expression)!=0:
+    for i in additional_expression:
+        if i[0]=="":
+            empty+=1
+        if i[1]=="":
+            empty+=1
 if len(additional_expression)==0:
     additional_expression=None
-
 if input1 is not None:
     if package!=[]:
-        anonymize_now=st.button("Run")
-        if anonymize_now:
-            results=anonymized_text_color(input1,package,union_intersection,additional_details,additional_expression)
-            original,anonymized=st.columns(2)
-            original.subheader("Original Text")
-            original.markdown(results[0],unsafe_allow_html=True)
-            anonymized.subheader("Anonymized Text")
-            anonymized.markdown(results[1],unsafe_allow_html=True)
-            st.snow()
+        if empty==0:
+            anonymize_now=st.button("Run")
+            if anonymize_now:
+                results=anonymized_text_color(input1,package,union_intersection,additional_details,additional_expression)
+                original,anonymized=st.columns(2)
+                original.subheader("Original Text")
+                original.markdown(results[0],unsafe_allow_html=True)
+                anonymized.subheader("Anonymized Text")
+                anonymized.markdown(results[1],unsafe_allow_html=True)
+                st.snow()
