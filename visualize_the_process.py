@@ -254,7 +254,7 @@ def anonymized_text_color(user_input,package=['stanza'],union_intersection=None,
             final_return = re.sub(i[0],i[1],final_return,flags=re.IGNORECASE)
             final_return = final_return.replace(i[1],''.join(["<font color='navy'> **",i[1],"** </font>"]))
     return [colored_text,final_return]
-
+st.caption("A run button will appear at the end of the page when all required details are given")
 st.title("Lets Visualize!")
 option=st.radio("Would you like to see a color-coded output for a single manual input or a txt file?",("Single Manual Input","txt file"))
 input1=None
