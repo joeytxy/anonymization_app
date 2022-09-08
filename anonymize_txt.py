@@ -212,9 +212,11 @@ def anonymized_text(user_input,package=['stanza'],union_intersection=None,additi
         for i in additional_expression:
             final_return = re.sub(i[0],i[1],final_return, flags=re.IGNORECASE)
     return final_return  
-
+st.title("Anonymize txt File")
+count=0
 file_received = st.file_uploader("", type=['txt'])
 if file_received is not None:
+    count+=1
     original_file_name=file_received.name
     final_file_name=original_file_name.replace(".txt", "_anonymized_") + ".txt"
     input1=""
@@ -224,6 +226,8 @@ if file_received is not None:
 package_choice,other_detail,other_expression=st.columns(3)
 package_choice.subheader("Step 1")
 package=package_choice.multiselect("Select the package(s) you would like to use. You may also select more than one package",['nltk','spacy','flair','stanza'])
+if package!=[]:
+    count+=1
 union_intersection=None
 if len(package)>1:
     union_intersection=package_choice.radio("Would you like to take an union or an intersection?",('union','intersection'))
@@ -275,17 +279,16 @@ for i in range(0,int(num)):
 if len(additional_expression)==0:
     additional_expression=None
 
-if file_received is not None:
-    if package!=[]:
-        anonymize_now=st.button("Run")
-        if anonymize_now:
-            st.download_button(
-            label="Download anonymized file",
-            data=anonymized_text(input1,package,union_intersection,additional_details,additional_expression),
-            file_name=final_file_name,
-            mime="text/plain"
-            )
-            st.snow()
+if count==2:
+    anonymize_now=st.button("Run")
+    if anonymize_now:
+        st.download_button(
+        label="Download anonymized file",
+        data=anonymized_text(input1,package,union_intersection,additional_details,additional_expression),
+        file_name=final_file_name,
+        mime="text/plain"
+        )
+        st.snow()
 
 
 
