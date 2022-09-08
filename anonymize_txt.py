@@ -212,6 +212,7 @@ def anonymized_text(user_input,package=['stanza'],union_intersection=None,additi
         for i in additional_expression:
             final_return = re.sub(i[0],i[1],final_return, flags=re.IGNORECASE)
     return final_return  
+st.caption("A run button will appear at the end of the page when all required details are given")
 st.title("Anonymize txt File")
 count=0
 file_received = st.file_uploader("", type=['txt'])
