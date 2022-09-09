@@ -28,7 +28,9 @@ models=load_models()
 spacy_nlp=models[0]
 tagger=models[1]
 stanza_nlp=models[2]
-
+if st.button("Please clear all once you are done with the app, to prevent memory limit issues on Streamlit."):
+    # Clears all singleton caches:
+    st.experimental_singleton.clear()
 def main():
     st.title("Welcome to my anonymization tool!")
     menu=["About","Evaluation of Packages","Visualize the Process","Anonymize Manual Input","Anonymize txt File","Anonymize CSV File"]
@@ -54,8 +56,4 @@ def main():
         exec(open("anonymize_csv.py").read())
 
 if __name__ == '__main__':
-    main()
-    
-if st.button("Please clear all once you are done with the app, to prevent memory limit issues on Streamlit"):
-    # Clears all singleton caches:
-    st.experimental_singleton.clear()
+    main()    
