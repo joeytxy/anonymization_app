@@ -55,3 +55,7 @@ def main():
 
 if __name__ == '__main__':
     main()
+    
+if st.button("Please clear all once you are done with the app, to prevent memory limit issues on Streamlit"):
+    # Clears all singleton caches:
+    st.experimental_singleton.clear()
