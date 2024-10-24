@@ -12,7 +12,7 @@ from flair.models import SequenceTagger
 from flair.tokenization import SpacyTokenizer
 import stanza
 
-@st.experimental_singleton
+@st.cache_resource
 def load_models():
     nltk.download('punkt')
     nltk.download('averaged_perceptron_tagger')
