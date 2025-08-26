@@ -14,20 +14,56 @@ import stanza
 
 @st.cache_resource
 def load_models():
-    nltk.download('punkt')
-    nltk.download('averaged_perceptron_tagger')
-    nltk.download('maxent_ne_chunker')
-    nltk.download('words')
-    spacy_model = spacy.load('en_core_web_sm')
-    flair_model=SequenceTagger.load('ner')
-    stanza.download('en')
-    stanza_model = stanza.Pipeline('en', download_method=None)
-    return [spacy_model,flair_model,stanza_model]
+    # -----------------------------
+    # 1. NLTK downloads
+    # -----------------------------
+    nltk.download('punkt', quiet=True)
+    nltk.download('averaged_perceptron_tagger', quiet=True)
+    nltk.download('maxent_ne_chunker', quiet=True)
+    nltk.download('words', quiet=True)
 
-models=load_models()
-spacy_nlp=models[0]
-tagger=models[1]
-stanza_nlp=models[2]
+    # -----------------------------
+    # 2. spaCy model
+    # -----------------------------
+    spacy_nlp = spacy.load("en_core_web_sm")
+
+    # -----------------------------
+    # 3. Flair model
+    # -----------------------------
+    # Clear old Flair cache to avoid PyTorch 2.6 incompatibility
+    flair_cache = os.path.expanduser("~/.flair")
+    if os.path.exists(flair_cache):
+        shutil.rmtree(flair_cache)
+
+    tagger = SequenceTagger.load("ner")
+
+    # -----------------------------
+    # 4. Stanza model
+    # -----------------------------
+    if not os.path.exists(os.path.expanduser("~/.stanza_resources/en")):
+        stanza.download("en")
+    stanza_nlp = stanza.Pipeline('en', download_method=None, verbose=False)
+
+    return spacy_nlp, tagger, stanza_nlp
+
+spacy_nlp, tagger, stanza_nlp = load_models()
+
+# @st.cache_resource
+# def load_models():
+#     nltk.download('punkt')
+#     nltk.download('averaged_perceptron_tagger')
+#     nltk.download('maxent_ne_chunker')
+#     nltk.download('words')
+#     spacy_model = spacy.load('en_core_web_sm')
+#     flair_model=SequenceTagger.load('ner')
+#     stanza.download('en')
+#     stanza_model = stanza.Pipeline('en', download_method=None)
+#     return [spacy_model,flair_model,stanza_model]
+
+# models=load_models()
+# spacy_nlp=models[0]
+# tagger=models[1]
+# stanza_nlp=models[2]
 
 def main():
     st.title("Welcome to my anonymization tool!")
