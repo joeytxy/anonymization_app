@@ -12,15 +12,6 @@ from flair.models import SequenceTagger
 from flair.tokenization import SpacyTokenizer
 import stanza
 
-# Temporary patch for PyTorch 2.6
-import torch
-orig_torch_load = torch.load
-def torch_load_patch(*args, **kwargs):
-    if "weights_only" in kwargs:
-        kwargs["weights_only"] = False
-    return orig_torch_load(*args, **kwargs)
-torch.load = torch_load_patch
-
 @st.cache_resource
 def load_models():
     nltk.download('punkt')
