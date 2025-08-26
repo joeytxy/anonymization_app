@@ -19,15 +19,16 @@ def load_models():
     nltk.download('maxent_ne_chunker')
     nltk.download('words')
     spacy_model = spacy.load('en_core_web_sm')
-    #flair_model=SequenceTagger.load('ner')
+    flair_model=SequenceTagger.load('ner')
     stanza.download('en')
     stanza_model = stanza.Pipeline('en', download_method=None)
-    #return [spacy_model,flair_model,stanza_model]
-    return [spacy_model,stanza_model]
+    return [spacy_model,flair_model,stanza_model]
+    
     
 models=load_models()
 spacy_nlp=models[0]
-stanza_nlp=models[1]
+tagger=models[1]
+stanza_nlp=models[2]
 
 def main():
     st.title("Welcome to my anonymization tool!")
